@@ -12,9 +12,26 @@ export class AppComponent {
   public tasks: Task[] = [];
 
   constructor() {
-    this.tasks.push(new Task(1,"developer todolist angular version", "programming", false))
-    this.tasks.push(new Task(2,"finish the 2nd LOTR book", "personal", false))
-    this.tasks.push(new Task(3,"go to the gym", "personal", true))
+  
     
+  }
+
+  removeTask(task: Task): void {
+    const taskIndex = this.tasks.indexOf(task)
+    taskIndex == -1? console.log("Task dont found") : this.tasks.splice(taskIndex, 1)
+
+  }
+
+  finishTask(task: Task){
+    task.done = true
+  }
+
+  reopenTask(task: Task){
+    task.done = false
+  }
+
+  addTask(title: String, category: String){
+    !title || title.length == 0 ? console.log("erro") : this.tasks.push(new Task(this.tasks.length + 1, title, category, false))
+
   }
 }

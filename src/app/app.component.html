@@ -1,11 +1,25 @@
 <h1>{{title}}</h1>
 
+<form action="">
+    <input type="text" #inputtask placeholder="What to do next?"
+    (keyup.enter)="addTask(inputtask.value, categoryselect.value); inputtask.value=''">
+    <input type="button" name="submit-task" id="submit-task" (click)="addTask(inputtask.value, categoryselect.value)">
+    <br>
+    <label for="Categories">Choose a category: </label>
+    <select name="Categories" id="Category" #categoryselect>
+      <option value="Work">1 - Work</option>
+      <option value="Personal">2 - Personal</option>
+      <option value="Health">3 - Health</option>
+      <option value="Fun">4 - Fun</option>
+    </select>
+</form>
 <div>
   <ul>
     <li *ngFor="let task of tasks">
-      {{task.id}} - {{task.title}} | Complete: {{task.done}} 
+      {{task.id}} - {{task.title}} | Complete: {{task.done}} | Category: {{categoryselect.value}}
+      <button *ngIf="task.done">Done</button>
+      <button *ngIf="!task.done">Edit</button>
       <button>Delete</button>  
-      <button *ngIf="!task.done">Done</button>
     </li>
   </ul>
 </div>
