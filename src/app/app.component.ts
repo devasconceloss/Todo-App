@@ -31,7 +31,12 @@ export class AppComponent {
   }
 
   addTask(title: String, category: String){
-    !title || title.length == 0 ? console.log("erro") : this.tasks.push(new Task(this.tasks.length + 1, title, category, false))
+
+    if(!category || !title || title.length == 0){
+      alert("No")
+    } else {
+      this.tasks.push(new Task(this.tasks.length + 1, title, category, false))
+    }
 
   }
 }
