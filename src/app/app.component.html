@@ -1,25 +1,37 @@
 <h1>{{title}}</h1>
 
-<form action="">
-    <input type="text" #inputtask placeholder="What to do next?"
-    (keyup.enter)="addTask(inputtask.value, categoryselect.value); inputtask.value=''">
-    <input type="button" name="submit-task" id="submit-task" (click)="addTask(inputtask.value, categoryselect.value)">
-    <br>
-    <label for="Categories">Choose a category: </label>
-    <select name="Categories" id="Category" #categoryselect>
-      <option value="Work">1 - Work</option>
-      <option value="Personal">2 - Personal</option>
-      <option value="Health">3 - Health</option>
-      <option value="Fun">4 - Fun</option>
-    </select>
+<form [formGroup]="form">
+    <fieldset id="add-task">
+      <input type="text"
+      placeholder="What to do next?" 
+      formControlName="title" required 
+      maxlength="30" #inputtask>
+
+      <small *ngIf="form.controls['title'].invalid && !form.controls['title'].pristine"
+      >This field should contain at least 3 caracteres</small>
+
+      <input type="button" value="Add Task" [disabled]="form.invalid" (click)="addTask()">
+      <br>
+      <br>
+
+      <label for="Categories">Choose a category: </label>
+      <select name="Categories" id="category" formControlName="category" required>
+        <option value="Choose Here" selected disabled hidden>Choose Here</option>
+        <option value="Work">1 - Work</option>
+        <option value="Personal">2 - Personal</option>
+        <option value="Health">3 - Health</option>
+        <option value="Fun">4 - Fun</option>
+      </select>
+    </fieldset>
 </form>
+
 <div>
   <ul>
     <li *ngFor="let task of tasks">
-      {{task.id}} - {{task.title}} | Complete: {{task.done}} | Category: {{categoryselect.value}}
-      <button *ngIf="task.done">Done</button>
-      <button *ngIf="!task.done">Edit</button>
-      <button>Delete</button>  
+      {{task.id}} - {{task.title}} | Complete: {{task.done}} | Category: {{task.category}}
+      <button *ngIf="!task.done" (click)="finishTask(task)">Done</button>
+      <button *ngIf="task.done" (click)="reopenTask(task)">Edit</button>
+      <button (click)="removeTask(task)">Delete</button>  
     </li>
   </ul>
 </div>
