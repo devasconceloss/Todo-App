@@ -2,10 +2,6 @@ h1, form{
     text-align: center;
 }
 
-div {
-    display: flex;
-    justify-content: center;
-}
 ul {
     display: flex;
     flex-direction: column;
@@ -17,3 +13,4 @@ ul {
 li {
     width: 300px;
 }
+
