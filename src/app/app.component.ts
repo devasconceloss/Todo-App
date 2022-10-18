@@ -27,7 +27,7 @@ export class AppComponent {
       ])],
     });
   
-    
+    this.loadPreviousTasks()
   }
 
   addTask(){
@@ -37,6 +37,7 @@ export class AppComponent {
     const done = false
     
     this.tasks.push(new Task(id, title, category, done))
+    this.savingOnLocal()
     this.erasePreviousData()
     
   }
@@ -44,6 +45,7 @@ export class AppComponent {
   removeTask(task: Task): void {
     const taskIndex = this.tasks.indexOf(task)
     taskIndex == -1? console.log("Task dont found") : this.tasks.splice(taskIndex, 1)
+  
 
   }
 
@@ -57,5 +59,20 @@ export class AppComponent {
 
   erasePreviousData(){
     this.form.reset()
+  }
+
+  savingOnLocal(){
+    const localData = JSON.stringify(this.tasks)
+    localStorage.setItem("tasks", localData)
+  }
+
+  loadPreviousTasks(){
+    const data = localStorage.getItem("tasks")
+    if(data){
+      this.tasks = JSON.parse(data)
+    } else {
+      this.tasks = []
+    }
+    
   }
 }
