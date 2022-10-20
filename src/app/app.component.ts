@@ -44,11 +44,19 @@ export class AppComponent {
 
   removeTask(task: Task): void {
     const taskIndex = this.tasks.indexOf(task)
-    taskIndex == -1? console.log("Task dont found") : this.tasks.splice(taskIndex, 1)
-  
+    if(taskIndex != -1){
+      this.tasks.splice(taskIndex, 1)
+      const localData = JSON.parse(localStorage.getItem("tasks"))
+      localData.splice(taskIndex,1)
+      
+      const attData = JSON.stringify(localData)
+      localStorage.setItem("tasks", attData)
 
+    } 
+  
   }
 
+  
   finishTask(task: Task){
     task.done = true
   }
