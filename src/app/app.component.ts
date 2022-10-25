@@ -35,7 +35,8 @@ export class AppComponent {
     const title = this.form.controls['title'].value
     const category = this.form.controls['category'].value
     const done = false
-    
+
+
     this.tasks.push(new Task(id, title, category, done))
     this.savingOnLocal()
     this.erasePreviousData()
@@ -56,7 +57,6 @@ export class AppComponent {
   
   }
 
-  
   finishTask(task: Task){
     task.done = true
   }
