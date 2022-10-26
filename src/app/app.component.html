@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <div id="task-container">
   <h1>{{title}}</h1>
 
@@ -16,9 +16,9 @@
           
           <select name="Categories" id="category" formControlName="category" required>
             <option value="Work">1 - Work</option>
-            <option value="Personal">2 - Personal</option>
-            <option value="Health">3 - Health</option>
-            <option value="Fun">4 - Fun</option>
+            <option value="Health">2 - Health</option>
+            <option value="Fun">3 - Fun</option>
+            <option value="Other">4 - Other</option>
           </select>
 
         </div>
@@ -26,15 +26,34 @@
         <input type="button" id="submit-task" value="Add Task" [disabled]="form.invalid" (click)="addTask()">
       </fieldset>
   </form>
-  
-  <div id="tasklist-container">
-    <ul id="tasklist">
-      <li *ngFor="let task of tasks" style="list-style: none;">
-        {{task.title}} | Complete: {{task.done}} | Category: {{task.category}}
-        <button *ngIf="!task.done" (click)="finishTask(task)">Done</button>
-        <button *ngIf="task.done" (click)="reopenTask(task)">Edit</button>
-        <button (click)="removeTask(task)">Delete</button>  
-      </li>
-    </ul>
-  </div>
+
+</div>
+<div id="tasklist-container" *ngIf="tasks.length != 0">
+  <ul id="tasklist">
+    <li *ngFor="let task of tasks" style="list-style: none;">
+     
+      <input type="text" name="" id="" value="{{task.title}} | {{task.category}}" readonly>
+
+      <span 
+      (click)="finishTask(task)"
+      class="material-symbols-outlined" 
+      id="edit-task"
+      >Done</span>
+      
+      <div id="task-management">
+        <span class="material-symbols-outlined">Menu</span>
+        <div class="drop-content">
+          <span 
+          *ngIf="!task.done" 
+          (click)="reopenTask(task)"
+          class="material-symbols-outlined" 
+          >Edit</span>
+          <span 
+          class="material-symbols-outlined" 
+          (click)="removeTask(task)"
+          >Delete</span>   
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
