@@ -33,8 +33,23 @@ export class AppComponent {
   addTask(){
     const id = this.tasks.length + 1
     const title = this.form.controls['title'].value
-    const category = this.form.controls['category'].value
+    let category = this.form.controls['category'].value
     const done = false
+
+    switch(category){
+      case "Work":
+        category = "👜"
+        break;
+      case "Health":
+        category = "💓"
+        break;
+      case "Fun":
+        category = "😛"
+        break;
+      case "Other":
+        category = "➕"
+        break;
+    }
 
 
     this.tasks.push(new Task(id, title, category, done))
