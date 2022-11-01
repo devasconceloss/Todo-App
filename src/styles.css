@@ -28,13 +28,17 @@ h1 {
     font-weight: 600;
 }
 
-#add-task input {
+#add-todo input {
     padding: .3rem .5rem;
     margin-right: .2rem;
 }
 
+#add-todo {
+    display: flex;
+    justify-content: space-around;
+}
 
-#task-container {
+#todo-container {
     width: 400px;
     margin: 1rem auto;
     padding: 1rem;
@@ -42,7 +46,7 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-#tasklist-container {
+#todolist-container {
     margin: 1rem auto;
     width: 400px;
     background-color: var(--color4);
@@ -50,21 +54,21 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-#tasklist li {
+#todolist li {
     display: flex;
     justify-content: space-between;
     padding: .4rem 1rem;
     
 }
 
-#tasklist input {
+#todolist input {
     font-family: 'Merriweather', serif;
     font-style: italic;
     padding: 0 .5rem;
     width: 70%;
 }
 
-#task-management {
+#todo-management {
     position: relative;
     display: inline-block;
 }
@@ -88,7 +92,7 @@ h1 {
     cursor: pointer;
 }
 
-#task-management:hover .drop-content {
+#todo-management:hover .drop-content {
     display: flex;
     padding: .5rem 1rem;
     padding-bottom: 2rem;
@@ -97,19 +101,19 @@ h1 {
 }
 
 
-#new-task {
+#new-todo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#submit-task {
+#submit-todo {
     width: 20%;
     display: flex;
     align-items: flex-end;
 }
 
-#task-form {
+#todo-form {
     padding: 1rem;
 }
 
@@ -117,7 +121,7 @@ fieldset {
     border: none;
 }
 
-#edit-task {
+#finish-todo {
     margin-left: 1.5rem;
 }
 
@@ -141,6 +145,17 @@ input {
     width: .5rem;
 }
 
-.drop-content span:hover {
+.drop-content span:hover, #finish-todo {
     cursor: pointer;
+}
+
+#todo-container select {
+    background-color: var(--containercolor);
+    height: 25.6px;
+    color: var(--color4);
+    border: none;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    --webkit-appearance: button;
+    appearance: button;
+    outline: none;
 }

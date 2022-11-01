@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Task } from 'src/models/task.model';
+import { Todo } from 'src/models/todo.model';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +10,14 @@ import { Task } from 'src/models/task.model';
 
 export class AppComponent {
   public title: String = 'Todo List';
-  public tasks: Task[] = [];
+  public todos: Todo[] = [];
   public form: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       title: ['', Validators.compose([
         Validators.minLength(3),
-        Validators.maxLength(30),
+        Validators.maxLength(25),
         Validators.required
       ])],
       category: ['', Validators.compose([
@@ -31,7 +31,7 @@ export class AppComponent {
   }
 
   addTask(){
-    const id = this.tasks.length + 1
+    const id = this.todos.length + 1
     const title = this.form.controls['title'].value
     let category = this.form.controls['category'].value
     const done = false
@@ -52,32 +52,32 @@ export class AppComponent {
     }
 
 
-    this.tasks.push(new Task(id, title, category, done))
+    this.todos.push(new Todo(id, title, category, done))
     this.savingOnLocal()
     this.erasePreviousData()
     
   }
 
-  removeTask(task: Task): void {
-    const taskIndex = this.tasks.indexOf(task)
+  removeTask(todo: Todo): void {
+    const taskIndex = this.todos.indexOf(todo)
     if(taskIndex != -1){
-      this.tasks.splice(taskIndex, 1)
+      this.todos.splice(taskIndex, 1)
       const localData = JSON.parse(localStorage.getItem("tasks"))
       localData.splice(taskIndex,1)
       
       const attData = JSON.stringify(localData)
-      localStorage.setItem("tasks", attData)
+      localStorage.setItem("todos", attData)
 
     } 
   
   }
 
-  finishTask(task: Task){
-    task.done = true
+  finishTask(todo: Todo){
+    todo.done = true
   }
 
-  reopenTask(task: Task){
-    task.done = false
+  reopenTask(todo: Todo){
+    todo.done = false
   }
 
   erasePreviousData(){
@@ -85,17 +85,18 @@ export class AppComponent {
   }
 
   savingOnLocal(){
-    const localData = JSON.stringify(this.tasks)
-    localStorage.setItem("tasks", localData)
+    const localData = JSON.stringify(this.todos)
+    localStorage.setItem("todos", localData)
   }
 
   loadPreviousTasks(){
-    const data = localStorage.getItem("tasks")
+    const data = localStorage.getItem("todos")
     if(data){
-      this.tasks = JSON.parse(data)
+      this.todos = JSON.parse(data)
     } else {
-      this.tasks = []
+      this.todos = []
     }
     
   }
 }
+  
