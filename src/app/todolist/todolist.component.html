@@ -1,0 +1,32 @@
+
+<!---
+<div id="todolist-container" *ngIf="todos.length != 0">
+    <ul id="todolist">
+      <li *ngFor="let todo of todos" style="list-style: none;">
+       
+        <input type="text" value="{{todo.title}} | {{todo.category}}" readonly>
+  
+        <span 
+        (click)="finishTask(todo)"
+        class="material-symbols-outlined" 
+        id="finish-todo"
+        >Done</span>
+        
+        <div id="todo-management">
+          <span class="material-symbols-outlined">Menu</span>
+          <div class="drop-content">
+            <span 
+            *ngIf="!todo.done" 
+            (click)="reopenTask(todo)"
+            class="material-symbols-outlined" 
+            >Edit</span>
+            <span 
+            class="material-symbols-outlined" 
+            (click)="removeTask(todo)"
+            >Delete</span>   
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+-->

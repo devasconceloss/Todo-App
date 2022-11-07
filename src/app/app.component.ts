@@ -11,6 +11,7 @@ import { Todo } from 'src/models/todo.model';
 export class AppComponent {
   public title: String = 'Todo List';
   public todos: Todo[] = [];
+  public doneTodos: Todo[] = [];
   public form: FormGroup;
 
   
@@ -76,6 +77,7 @@ export class AppComponent {
 
   finishTask(todo: Todo){
     todo.done = true
+
   }
 
   reopenTask(todo: Todo){
