@@ -13,6 +13,7 @@ export class TodolistComponent implements OnInit {
   public title: String = 'Todo List';
   public todos: Todo[] = [];
   public doneTodos: Todo[] = [];
+  public tobeDone: Todo[] = [];
   public form: FormGroup;
 
   constructor(private fb: FormBuilder) { 
@@ -53,7 +54,10 @@ export class TodolistComponent implements OnInit {
 
 
     this.todos.push(new Todo(id, title, category, done))
-    this.savingOnLocal()
+    this.tobeDone.push(new Todo(id, title, category, done))
+
+    this.savingOnLocal("todos")
+    this.savingOnLocal("tobeDone")
     this.erasePreviousData()
     
   }
@@ -65,15 +69,28 @@ export class TodolistComponent implements OnInit {
       const localData = JSON.parse(localStorage.getItem("todos"))
       localData.splice(taskIndex,1)
       
-      const attData = JSON.stringify(localData)
-      localStorage.setItem("todos", attData)
+      
+      this.attData(localData)
 
     } 
   
   }
 
+  attData(data: any){
+    const attData = JSON.stringify(data)
+    localStorage.setItem("todos", attData)
+  }
+
   finishTask(todo: Todo){
     todo.done = true
+    
+    const taskIndex = this.todos.indexOf(todo)
+    this.tobeDone.splice(taskIndex, 1)
+    this.doneTodos.push(todo)
+    
+    const db = "concluded"
+    this.savingOnLocal(db)
+
 
   }
 
@@ -85,9 +102,9 @@ export class TodolistComponent implements OnInit {
     this.form.reset()
   }
 
-  savingOnLocal(){
+  savingOnLocal(data: string){
     const localData = JSON.stringify(this.todos)
-    localStorage.setItem("todos", localData)
+    localStorage.setItem(data, localData)
   }
 
   loadPreviousTasks(){

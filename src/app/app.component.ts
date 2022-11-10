@@ -9,6 +9,7 @@ import { Todo } from 'src/models/todo.model';
 })
 
 export class AppComponent {
+  public title: String = 'Todo List';
 
   constructor() {
    
