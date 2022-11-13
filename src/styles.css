@@ -68,6 +68,12 @@ fieldset {
     align-items: flex-end;
 }
 
+#advice-form {
+    font-size: small;
+    padding-left: 1rem;
+    font-style: italic;
+}
+
 #todolist-container {
     margin: 1rem auto;
     width: 400px;

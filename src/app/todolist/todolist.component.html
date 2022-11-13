@@ -9,11 +9,6 @@
           placeholder="What to do next?" 
           formControlName="title" required 
           maxlength="30" #inputtask id="input-task">
-          <!--
-            <span id="advice-form" *ngIf="form.controls['title'].invalid && !form.controls['title'].pristine"
-            >This field should contain at least 3 caracteres</span>
-
-          -->
           
           <select name="Categories" id="category" formControlName="category" required>
             <option value="Work">1 - Work</option>
@@ -26,8 +21,19 @@
         </div>
         
         <input type="button" id="submit-todo" value="Add Task" [disabled]="form.invalid" (click)="addTask()">
+
       </fieldset>
-  </form>
+    </form>
+    <span 
+        id="advice-form"   
+        *ngIf="form.controls['title'].invalid && !form.controls['title'].pristine"
+        >This field should contain at least 3 caracteres
+    </span>
+    <span 
+        id="advice-form"   
+        *ngIf="form.controls['category'].invalid && !form.controls['category'].pristine"
+        >Select a category
+    </span>
 
 </div>
 <div id="todolist-container" *ngIf="todos.length != 0">
