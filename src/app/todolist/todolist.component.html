@@ -19,8 +19,9 @@
           
 
         </div>
-        
-        <input type="button" id="submit-todo" value="Add Task" [disabled]="form.invalid" (click)="addTask()">
+        <div id="add-button">
+          <input type="button" id="submit-todo" value="Add Task" [disabled]="form.invalid" (click)="addTask()">
+        </div>
 
       </fieldset>
     </form>
@@ -38,28 +39,26 @@
 </div>
 <div id="todolist-container" *ngIf="todos.length != 0">
   <ul id="todolist">
-    <li *ngFor="let todo of todos" style="list-style: none;">
-     
+    <li *ngFor="let todo of todos" style="list-style: none;"> 
+      <!-- 
+
+        <span id="doneTodo" class="material-symbols-outlined">Done</span>
+      -->
+      
+      <input type="text" value="{{todo.title}}" readonly id="todo-text">
+        
+      <div id="action-buttons">
         <span 
-        (click)="finishTask(todo)"
+        *ngIf="!todo.done" 
+        (click)="reopenTask(todo)"
         class="material-symbols-outlined" 
-        id="finish-todo"
-        >Done</span>
-        <input type="text" value="{{todo.title}}" readonly id="todo-text">
-        <span id="category-emoji">{{todo.category}}</span>
-
-        <div id="action-buttons">
-            <span 
-            *ngIf="!todo.done" 
-            (click)="reopenTask(todo)"
-            class="material-symbols-outlined" 
-            >Edit</span>
-            <span 
-            class="material-symbols-outlined" 
-            (click)="removeTask(todo)"
-            >Delete</span>   
-        </div>
-
+        >Edit</span>
+        <span 
+        class="material-symbols-outlined" 
+        (click)="removeTask(todo)"
+        >Delete</span>   
+      </div>
+      
     </li>
   </ul>
 </div>

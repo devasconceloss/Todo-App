@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/models/todo.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { animate, trigger, style, transition } from '@angular/animations';
+import { ApiService } from '../services/api.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 
 @Component({
@@ -16,7 +19,8 @@ export class TodolistComponent implements OnInit {
   public tobeDone: Todo[] = [];
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private http: HttpClient) { 
+
     this.form = this.fb.group({
       title: ['', Validators.compose([
         Validators.minLength(3),
@@ -29,7 +33,17 @@ export class TodolistComponent implements OnInit {
         Validators.required
       ])],
     });
+
   }
+
+  requestTodos(){
+    return this.http.get("http://127.0.0.1:8000/").subscribe((response) =>{
+    console.log(JSON.stringify(response))
+    
+  });
+  }
+
+  
 
   addTask(){
     const id = this.todos.length + 1
