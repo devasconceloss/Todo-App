@@ -5,12 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { TodolistComponent } from './todolist/todolist.component';
+import { TodolistComponent } from './components/todolist/todolist.component';
+import { TodoContentComponent } from './components/todo-content/todo-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodolistComponent
+    TodolistComponent,
+    TodoContentComponent
   ],
   imports: [
     BrowserModule,
