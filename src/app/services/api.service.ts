@@ -5,14 +5,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
+   api_server_url: string = "http://127.0.0.1:8000";
   
   constructor(private http: HttpClient) { 
-    const api_server_url = "http://127.0.0.1:8000";
 
-    this.http.get(api_server_url, {responseType: 'text'}).subscribe((response) => {
-      alert(JSON.stringify(response))
-    })
   }
 
+  public getTodos(){
+    return this.http.get(`${this.api_server_url}`)
+  }
 
 }
