@@ -37,28 +37,4 @@
     </span>
 
 </div>
-<div id="todolist-container" *ngIf="todos.length != 0">
-  <ul id="todolist">
-    <li *ngFor="let todo of todos" style="list-style: none;"> 
-      <!-- 
-
-        <span id="doneTodo" class="material-symbols-outlined">Done</span>
-      -->
-      
-      <input type="text" value="{{todo.title}}" readonly id="todo-text">
-        
-      <div id="action-buttons">
-        <span 
-        *ngIf="!todo.done" 
-        (click)="reopenTask(todo)"
-        class="material-symbols-outlined" 
-        >Edit</span>
-        <span 
-        class="material-symbols-outlined" 
-        (click)="removeTask(todo)"
-        >Delete</span>   
-      </div>
-      
-    </li>
-  </ul>
-</div>
+<app-todo-content></app-todo-content>
