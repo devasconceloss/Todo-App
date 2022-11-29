@@ -1,1 +1,20 @@
-<p>todo-content works!</p>
+<div id="todolist-container" *ngFor="let todo of todos">
+  <ul style="list-style-type: none;" id="todolist">
+    <li>
+      <input type="text" value="{{todo.title}}" id="todo-text" readonly>
+
+      <div id="action-buttons">
+        <fa-icon
+        [ngStyle]="{color: 'blue'}"
+        [icon]="faCheck"
+        >
+        </fa-icon>
+        <fa-icon 
+        [ngStyle]="{color: 'red'}"
+        [icon]="faTimes">
+        </fa-icon>
+      </div>
+
+    </li>
+  </ul>
+</div>

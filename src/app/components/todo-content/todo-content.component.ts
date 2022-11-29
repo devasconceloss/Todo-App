@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from 'src/app/services/api.service';
+import { Todo } from 'src/models/todo.model';
+
 
 @Component({
   selector: 'app-todo-content',
@@ -6,10 +11,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-content.component.css']
 })
 export class TodoContentComponent implements OnInit {
+  faCheck = faCheck;
+  faTimes = faTimes;
+  todos: Todo[] = [];
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit() {
+    this.apiService.getTodos().subscribe((todoData) => {
+      this.todos = todoData['todos']
+      console.log(this.todos)
+    
+  });
+}
+    
 }

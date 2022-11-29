@@ -1,0 +1,10 @@
+#action-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 4rem;
+}
+
+#action-buttons fa-icon {
+    cursor: pointer;
+}
