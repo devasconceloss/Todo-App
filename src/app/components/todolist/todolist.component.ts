@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/models/todo.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { animate, trigger, style, transition } from '@angular/animations';
 import { ApiService } from '../../services/api.service';
 
@@ -12,26 +11,14 @@ import { ApiService } from '../../services/api.service';
 })
 export class TodolistComponent implements OnInit {
   public title: String = 'Todo List';
-  public todos: Todo[] = [];
-  public form: FormGroup;
+  todos: Todo[] = [];
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private apiService: ApiService) { 
 
-    this.form = this.fb.group({
-      title: ['', Validators.compose([
-        Validators.minLength(3),
-        Validators.maxLength(25),
-        Validators.required
-      ])],
-      category: ['', Validators.compose([
-        Validators.minLength(3),
-        Validators.maxLength(15),
-        Validators.required
-      ])],
-    });
 
   }
 
+/*
   addTask(){
     const id = this.todos.length + 1
     const title = this.form.controls['title'].value
@@ -104,11 +91,19 @@ export class TodolistComponent implements OnInit {
     } else {
       this.todos = []
     }
-    
-  }
+   */ 
+  
 
   ngOnInit() {
-  
+    this.apiService.getTodos().subscribe((todoData) => {
+      this.todos = todoData['todos']
+      console.log(this.todos)
+    })
+  }
+
+  deleteApiTodo(todo: Todo){
+    
+
   }
 
 }
