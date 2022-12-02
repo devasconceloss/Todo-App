@@ -1,4 +1,4 @@
-<div id="todolist-container" *ngFor="let todo of todos">
+<div id="todolist-container">
   <ul style="list-style-type: none;" id="todolist">
     <li>
       <input type="text" value="{{todo.title}}" id="todo-text" readonly>
@@ -10,6 +10,7 @@
         >
         </fa-icon>
         <fa-icon 
+        (click)="deletingTodo(todo)"
         [ngStyle]="{color: 'red'}"
         [icon]="faTimes">
         </fa-icon>
