@@ -20,4 +20,9 @@ export class ApiService {
 
   }
 
+  public deleteTodo(todo:Todo): Observable<Todo>{
+    const url_todo = `${this.api_server_url}/todo/${todo.id}`
+    return this.http.delete<Todo>(url_todo)
+  }
+
 }
