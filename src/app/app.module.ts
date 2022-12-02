@@ -8,12 +8,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { TodolistComponent } from './components/todolist/todolist.component';
 import { TodoContentComponent } from './components/todo-content/todo-content.component';
+import { AddtaskComponent } from './components/addtask/addtask.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodolistComponent,
-    TodoContentComponent
+    TodoContentComponent,
+    AddtaskComponent
   ],
   imports: [
     BrowserModule,
