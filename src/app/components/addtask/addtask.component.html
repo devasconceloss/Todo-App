@@ -1,0 +1,38 @@
+<div id="todo-container">
+    <h1>{{title}}</h1>
+  
+    <form [formGroup]="form" id="todo-form">
+      <fieldset id="new-todo">
+          <div id="add-todo">
+            <input type="text"
+            placeholder="What to do next?" 
+            formControlName="title" required 
+            maxlength="30" #inputtask id="input-task">
+            
+            <select name="Categories" id="category" formControlName="category" required>
+              <option value="Work">1 - Work</option>
+              <option value="Health">2 - Health</option>
+              <option value="Fun">3 - Fun</option>
+              <option value="Other">4 - Other</option>
+            </select>
+            
+  
+          </div>
+          <div id="add-button">
+            <input type="button" id="submit-todo" value="Add Task" [disabled]="form.invalid" (click)="addTask()">
+          </div>
+  
+        </fieldset>
+      </form>
+      <span 
+          id="advice-form"   
+          *ngIf="form.controls['title'].invalid && !form.controls['title'].pristine"
+          >This field should contain at least 3 caracteres
+      </span>
+      <span 
+          id="advice-form"   
+          *ngIf="form.controls['category'].invalid && !form.controls['category'].pristine"
+          >Select a category
+      </span>
+  
+  </div>
