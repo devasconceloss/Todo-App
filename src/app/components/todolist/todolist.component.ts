@@ -95,13 +95,18 @@ export class TodolistComponent implements OnInit {
   
 
   ngOnInit() {
-    this.apiService.getTodos().subscribe((todoData) => {
+    this.apiService
+    .getTodos()
+    .subscribe((todoData) => {
       this.todos = todoData['todos']
-      console.log(this.todos)
     })
   }
 
   deleteApiTodo(todo: Todo){
+    this.apiService
+    .deleteTodo(todo)
+    .subscribe(
+      () => (this.todos) = this.todos.filter((t) => t.id != todo.id))
     
 
   }
