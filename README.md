@@ -8,14 +8,18 @@ This is my very first project using Angular. I started this project with the int
 
 ## Project status:
 
-- [ ] Style
-- [x] Responsive
-- [x] Input validation
-- [x] Local Storage
-- [x] API Dedicated
-- [x] Form Builder
-- [ ] API Consuming
-- [ ] NewTodo Component
-- [ ] TodoList Component
+- [ ] Style (In Progress);
+- [x] Responsive (In Progress);
+- [x] Input validation;
+- [x] Form Builder;
+- [x] Add Task Component;
+- [x] Todo Content Component;
+- [x] TodoList Component;
+- [x] API Dedicated;
+- [x] API Consuming;
+- [x] Get all todos Endpoint;
+- [x] Delete Todo by Id Endpoint;
+- [ ] Create Todo Endpoint;
+- [ ] Deploy on GH Pages;
 
 
