@@ -11,9 +11,9 @@ import { Todo } from 'src/models/todo.model';
   styleUrls: ['./todo-content.component.css']
 })
 export class TodoContentComponent implements OnInit {
-  todos: Todo[] = [];
   @Input() todo: Todo;
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter
+  todos: Todo[] = [];
   faCheck = faCheck;
   faTimes = faTimes;
 
