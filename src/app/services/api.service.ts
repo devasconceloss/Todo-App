@@ -10,6 +10,7 @@ import { Todo } from 'src/models/todo.model';
 export class ApiService {
   
   api_server_url: string = "http://127.0.0.1:8000/";
+  url_todo: string;
   
   constructor(private http: HttpClient) { 
 
@@ -21,8 +22,12 @@ export class ApiService {
   }
 
   public deleteTodo(todo:Todo): Observable<Todo>{
-    const url_todo = `${this.api_server_url}todo/${todo.id}`
-    return this.http.delete<Todo>(url_todo)
+    this.url_todo = `${this.api_server_url}todo/${todo.id}`
+    return this.http.delete<Todo>(this.url_todo)
   }
 
+  public addTodo(new_todo: Todo): Observable<Todo>{
+    this.url_todo = `${this.api_server_url}todo/`
+    return this.http.post<Todo>(this.url_todo, new_todo)
+  }
 }
