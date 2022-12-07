@@ -39,12 +39,12 @@ export class AddtaskComponent implements OnInit {
   }
   
   addNewTodo(){
+    this.id++;
     let title_todo = this.form.controls['title'].value
     let category= this.form.controls['category'].value
     let done = false
 
-    this.new_todo = new Todo(this.id + 1, title_todo, category, done)
-    console.log(this.new_todo)
+    this.new_todo = new Todo(this.id, title_todo, category, done)
 
     this.newTodo.emit(this.new_todo)
   }
