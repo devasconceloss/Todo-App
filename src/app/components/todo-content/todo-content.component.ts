@@ -13,6 +13,7 @@ import { Todo } from 'src/models/todo.model';
 export class TodoContentComponent implements OnInit {
   @Input() todo: Todo;
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter
+  @Output() finishTodo: EventEmitter<Todo> = new EventEmitter
   todos: Todo[] = [];
   faCheck = faCheck;
   faTimes = faTimes;
@@ -26,6 +27,11 @@ export class TodoContentComponent implements OnInit {
 
   deletingTodo(todo: Todo){
     this.deleteTodo.emit(todo)
+  }
+
+
+  finishingTodo(todo: Todo){
+    this.finishTodo.emit(todo)
   }
 }
     

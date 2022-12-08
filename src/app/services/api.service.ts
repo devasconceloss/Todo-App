@@ -30,4 +30,9 @@ export class ApiService {
     this.url_todo = `${this.api_server_url}todo/`
     return this.http.post<Todo>(this.url_todo, new_todo)
   }
+
+  public finishTodo(todo: Todo): Observable<Todo>{
+    this.url_todo = `${this.api_server_url}todo/${todo.id}`
+    return this.http.put<Todo>(this.url_todo, todo)
+  }
 }

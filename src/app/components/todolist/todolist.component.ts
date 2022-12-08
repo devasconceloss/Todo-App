@@ -45,4 +45,12 @@ export class TodolistComponent implements OnInit {
     .subscribe(todo => this.todos.push(todo))
 
   }
+
+
+  finishApiTodo(todo: Todo){
+    this.apiService
+    .finishTodo(todo)
+    .subscribe(todo => this.todo.done = true)
+
+  }
 }
