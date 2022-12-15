@@ -22,12 +22,12 @@ export class ApiService {
   }
 
   public deleteTodo(todo:Todo): Observable<Todo>{
-    this.url_todo = `${this.api_server_url}todo/${todo.id}`
+    this.url_todo = `${this.api_server_url}todos/${todo.id}`
     return this.http.delete<Todo>(this.url_todo)
   }
 
   public addTodo(new_todo: Todo): Observable<Todo>{
-    this.url_todo = `${this.api_server_url}todo/`
+    this.url_todo = `${this.api_server_url}todos`
     return this.http.post<Todo>(this.url_todo, new_todo)
   }
 
