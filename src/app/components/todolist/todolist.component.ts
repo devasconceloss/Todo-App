@@ -24,7 +24,7 @@ export class TodolistComponent implements OnInit {
     this.apiService
     .getTodos()
     .subscribe((todoData) => {
-      this.todos = todoData['todos']
+      this.todos = todoData['result']
     })
     
   }
@@ -50,7 +50,7 @@ export class TodolistComponent implements OnInit {
   finishApiTodo(todo: Todo){
     this.apiService
     .finishTodo(todo)
-    .subscribe(todo => this.todo.done = true)
+    .subscribe(() => this.todo.done = true)
 
   }
 }
