@@ -17,7 +17,6 @@ export class AddtaskComponent implements OnInit {
   public id: number = 0;
   public title_todo: string;
   public category: string;
-  public done: boolean
   @Output() newTodo: EventEmitter<Todo> = new EventEmitter
 
 
@@ -42,7 +41,7 @@ export class AddtaskComponent implements OnInit {
     this.id++;
     let title_todo = this.form.controls['title'].value
     let category= this.form.controls['category'].value
-    let done = false
+    let done:boolean = false
 
     this.new_todo = new Todo(this.id, title_todo, category, done)
 
