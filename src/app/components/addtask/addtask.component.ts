@@ -35,26 +35,28 @@ export class AddtaskComponent implements OnInit {
         Validators.required
       ])],
     });
+    
 
-    this.apiService.getHighestId().then(highestId =>{
-      this.id = Number(highestId) + 1
-    })
+
 
   }
   
   addNewTodo(){
+    
     let title_todo = this.form.controls['title'].value
     let category = this.form.controls['category'].value
     let done:boolean = false
     
     this.new_todo = new Todo(this.id, title_todo, category, done)
-    this.id++;
 
     this.newTodo.emit(this.new_todo)
   }
 
-  ngOnInit() {
-
+  
+  async ngOnInit() {
+    const response = await this.apiService.getHighestId();
+    this.id = response + 1;
   }
+  
+  
 }
-
