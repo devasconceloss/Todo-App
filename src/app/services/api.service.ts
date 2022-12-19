@@ -30,17 +30,18 @@ export class ApiService {
   public addTodo(new_todo: Todo): Observable<Todo>{
     this.url_todo = `${this.api_server_url}todos`
     return this.http.post<Todo>(this.url_todo, new_todo)
+    .pipe(map(response => response['result']))
   }
 
   public  finishTodo(todo: Todo): Observable<Todo>{
-    this.url_todo = `${this.api_server_url}todos/${todo.id}`
+    this.url_todo = `${this.api_server_url}todos/finish/${todo.id}`
     return this.http.patch<Todo>(this.url_todo, todo)
   }
 
   public async getHighestId(): Promise<number>{
     this.url_todo = `${this.api_server_url}highest_id`
     this.http.get<number>(this.url_todo).subscribe()
-    
+
     const result = firstValueFrom(this.http.get<number>(this.url_todo))
     return result
   }
