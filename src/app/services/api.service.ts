@@ -1,6 +1,6 @@
-import { HttpClient, HttpRequest, JsonpInterceptor } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, lastValueFrom, map, Observable } from 'rxjs';
+import { firstValueFrom, map, Observable } from 'rxjs';
 import { Todo } from 'src/models/todo.model';
 
 
@@ -39,9 +39,8 @@ export class ApiService {
 
   public async getHighestId(): Promise<number>{
     this.url_todo = `${this.api_server_url}highest_id`
-    this.http.get<number>(this.url_todo).subscribe(response => {
-      response
-    })
+    this.http.get<number>(this.url_todo).subscribe()
+    
     const result = firstValueFrom(this.http.get<number>(this.url_todo))
     return result
   }
