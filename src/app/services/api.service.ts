@@ -1,6 +1,6 @@
 import { HttpClient, HttpRequest, JsonpInterceptor } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, lastValueFrom, map, Observable } from 'rxjs';
 import { Todo } from 'src/models/todo.model';
 
 
@@ -18,7 +18,8 @@ export class ApiService {
 
   public getTodos(): Observable<Todo>{
      return this.http.get<Todo>(this.api_server_url)
-
+     .pipe(map(response => response['result']))
+     
   }
 
   public deleteTodo(todo:Todo): Observable<Todo>{
@@ -36,9 +37,13 @@ export class ApiService {
     return this.http.patch<Todo>(this.url_todo, todo)
   }
 
-  public async getHighestId(): Promise<Number>{
+  public async getHighestId(): Promise<number>{
     this.url_todo = `${this.api_server_url}highest_id`
+    this.http.get<number>(this.url_todo).subscribe(response => {
+      response
+    })
     const result = firstValueFrom(this.http.get<number>(this.url_todo))
     return result
   }
+  
 }
