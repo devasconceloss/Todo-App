@@ -19,7 +19,6 @@ This is my very first project using Angular. I started this project with the int
 - [x] API Consuming;
 - [x] Get all todos Endpoint;
 - [x] Delete Todo by Id Endpoint;
-- [ ] Create Todo Endpoint;
+- [x] Create Todo Endpoint;
+- [x] Finishing Todo Endpoint;
 - [ ] Deploy on GH Pages;
-
-
