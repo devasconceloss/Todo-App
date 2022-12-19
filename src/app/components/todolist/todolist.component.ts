@@ -22,12 +22,12 @@ export class TodolistComponent implements OnInit {
 
   ngOnInit() {
     this.apiService
-    .getTodos()
-    .subscribe((todoData) => {
-      this.todos = todoData['result']
-    })
-    
+      .getTodos()
+      .subscribe((todoData) => {
+        this.todos = this.todos.concat(todoData);
+      })
   }
+  
 
   deleteApiTodo(todo: Todo){
     this.apiService
@@ -35,22 +35,18 @@ export class TodolistComponent implements OnInit {
     .subscribe(
       () => (this.todos) = this.todos.filter((t) => t.id != todo.id))
     
-
   }
-
 
   addApiTodo(new_todo: Todo){
     this.apiService
     .addTodo(new_todo)
     .subscribe(todo => this.todos.push(todo))
-
   }
 
 
   finishApiTodo(todo: Todo){
     this.apiService
     .finishTodo(todo)
-    .subscribe(() => this.todo.done = true)
-
+    todo.done = true
   }
 }
