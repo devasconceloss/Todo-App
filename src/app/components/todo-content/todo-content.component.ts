@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { ApiService } from 'src/app/services/api.service';
 import { Todo } from 'src/models/todo.model';
 
 
@@ -21,9 +20,9 @@ export class TodoContentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
     
   }
+
 
   deletingTodo(todo: Todo){
     this.deleteTodo.emit(todo)
