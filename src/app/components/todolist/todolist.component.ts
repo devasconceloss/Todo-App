@@ -12,6 +12,7 @@ import { ApiService } from '../../services/api.service';
 export class TodolistComponent implements OnInit {
   public title: String = 'Todo List';
   todos: Todo[] = [];
+  doneTodos: Todo[] = [];
   todo: Todo;
 
   constructor(private apiService: ApiService) { 
@@ -25,7 +26,9 @@ export class TodolistComponent implements OnInit {
       .getTodos()
       .subscribe((todoData) => {
         this.todos = this.todos.concat(todoData);
+        this.filterTodos()
       })
+
   }
   
 
@@ -48,5 +51,10 @@ export class TodolistComponent implements OnInit {
     this.apiService
     .finishTodo(todo)
     .subscribe((todo) => todo.done = true)
+  }
+
+  filterTodos(){
+    this.doneTodos = this.todos.filter(todo => todo.done == true)
+    console.log(this.doneTodos)
   }
 }
