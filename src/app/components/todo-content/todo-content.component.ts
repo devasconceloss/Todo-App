@@ -16,6 +16,7 @@ export class TodoContentComponent implements OnInit {
   todos: Todo[] = [];
   faCheck = faCheck;
   faTimes = faTimes;
+  @Input() color: string;
 
   constructor() { }
 

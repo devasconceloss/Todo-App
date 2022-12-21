@@ -18,7 +18,8 @@ export class AddtaskComponent implements OnInit {
   public id: number;
   public title_todo: string;
   public category: string;
-  @Output() newTodo: EventEmitter<Todo> = new EventEmitter
+  @Output() newTodo: EventEmitter<Todo> = new EventEmitter;
+  color: string
 
 
   constructor(private fb:FormBuilder, private apiService: ApiService) { 
@@ -42,12 +43,34 @@ export class AddtaskComponent implements OnInit {
     let title_todo = this.form.controls['title'].value
     let category = this.form.controls['category'].value
     let done:boolean = false
+
+    this.filteringCategories(category)
     
     this.new_todo = new Todo(this.id, title_todo, category, done)
     this.id++
 
     this.newTodo.emit(this.new_todo)
   }
+
+  filteringCategories(category: string): string {
+    switch(category) {
+      case "Work":
+        return this.color = 'work-color'
+        
+      case "Health":
+        return this.color = 'health-color'
+
+      case "Fun":
+        return this.color = 'fun-color'
+      
+      case "Other":
+        return this.color = 'other-color'
+          
+      default:
+        return 'default-color';
+    }
+  }
+  
 
 
   async ngOnInit() {
