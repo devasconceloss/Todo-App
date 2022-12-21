@@ -1,22 +1,14 @@
 <div id="todolist-container">
-  <ul style="list-style-type: none;" id="todolist">
-    <li>
-      <input type="text" value="{{todo.title}}" id="todo-text" readonly>
+  <div style="list-style-type: none;" id="todolist">
+    <div class="todo-item">
+      <input  type="text" value="{{todo.title}}" id="todo-text" readonly>
 
       <div id="action-buttons">
-        <fa-icon
-        (click)="finishingTodo(todo)"
-        [ngStyle]="{color: 'blue'}"
-        [icon]="faCheck"
-        >
-        </fa-icon>
-        <fa-icon 
-        (click)="deletingTodo(todo)"
-        [ngStyle]="{color: 'red'}"
-        [icon]="faTimes">
-        </fa-icon>
+        <fa-icon class="fa-check" [icon]="faCheck" (click)="finishingTodo(todo)"></fa-icon>
+        <fa-icon class="fa-times" [icon]="faTimes" (click)="deletingTodo(todo)"></fa-icon>
+        
       </div>
 
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>
