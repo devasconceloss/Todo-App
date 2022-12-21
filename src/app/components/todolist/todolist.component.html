@@ -4,6 +4,7 @@
 
 <app-todo-content
 *ngFor="let todo of todos"
+[color]="currentColor"
 [todo]="todo"
 (deleteTodo)="deleteApiTodo(todo)"
 (finishTodo)="finishApiTodo(todo)"

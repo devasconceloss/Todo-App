@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Todo } from 'src/models/todo.model';
 import { animate, trigger, style, transition } from '@angular/animations';
 import { ApiService } from '../../services/api.service';
@@ -13,8 +13,11 @@ export class TodolistComponent implements OnInit {
   public title: String = 'Todo List';
   todos: Todo[] = [];
   doneTodos: Todo[] = [];
+  allTodos: Todo[] = [];
   todo: Todo;
-
+  @Input() color: string;
+  currentColor: string;
+  arraySize: number;
   constructor(private apiService: ApiService) { 
 
 
@@ -27,6 +30,8 @@ export class TodolistComponent implements OnInit {
       .subscribe((todoData) => {
         this.todos = this.todos.concat(todoData);
         this.filterTodos()
+        this.arraySize = this.todos.length
+        console.log(this.arraySize) 
       })
 
   }
@@ -55,6 +60,5 @@ export class TodolistComponent implements OnInit {
 
   filterTodos(){
     this.doneTodos = this.todos.filter(todo => todo.done == true)
-    console.log(this.doneTodos)
   }
 }
