@@ -31,7 +31,6 @@ export class TodolistComponent implements OnInit {
         this.todos = this.todos.concat(todoData);
         this.filterTodos()
         this.arraySize = this.todos.length
-        console.log(this.arraySize) 
       })
 
   }
