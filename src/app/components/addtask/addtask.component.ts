@@ -10,7 +10,7 @@ import { Todo } from 'src/models/todo.model';
   styleUrls: ['./addtask.component.css']
 })
 export class AddtaskComponent implements OnInit {
-  public title: String = 'Todo List';
+  public title: String = 'Todo App';
   public todos: Todo[] = [];
   public form: FormGroup;
   public new_todo: Todo;
