@@ -13,7 +13,7 @@
               <option value="Work">1 - Work</option>
               <option value="Health">2 - Health</option>
               <option value="Fun">3 - Fun</option>
-              <option value="Other">4 - Other</option>
+              <option value="Personal">4 - Personal</option>
             </select>
             
   
@@ -24,15 +24,18 @@
   
         </fieldset>
       </form>
-      <span 
+      <span
           id="advice-form"   
           *ngIf="form.controls['title'].invalid && !form.controls['title'].pristine"
-          >This field should contain at least 3 caracteres
+          >
+          <fa-icon [icon]="faExclamation"></fa-icon>
+          Must contain at least 3 caracteres
       </span>
-      <span 
-          id="advice-form"   
-          *ngIf="form.controls['category'].invalid && !form.controls['category'].pristine"
-          >Select a category
-      </span>
-  
+      <span
+        id="advice-form"   
+        *ngIf="form.controls['category'].value == '' && !form.controls['title'].invalid"
+        >
+        <fa-icon [icon]="faExclamation"></fa-icon>
+        Select a category
+     </span>
   </div>
