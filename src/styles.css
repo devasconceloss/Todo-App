@@ -82,9 +82,6 @@ fieldset {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-
-
-
 input {
     border: none;
     appearance: none;
@@ -113,14 +110,16 @@ input {
     --webkit-appearance: button;
     appearance: button;
     outline: none;
+    padding-left: .2rem;
 }
 
 
-@media (min-width: 500px) {
+@media (max-width: 500px) {
     #todo-container, #todolist-container {
         width: 300px;
         padding: .3rem 1rem;
     }
+
     #add-todo {
         width: 100%;
         display: flex;
@@ -129,6 +128,9 @@ input {
     }
     #add-todo input{
         width: 70%;
+    }
+    input#todo-text {
+        background: #fff;
     }
 
     #todolist-container li {
