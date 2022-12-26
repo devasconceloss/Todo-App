@@ -2,10 +2,13 @@
 
 <app-addtask (newTodo)="addApiTodo($event)"></app-addtask>
 
-<app-todo-content
-*ngFor="let todo of todos"
-[color]="currentColor"
-[todo]="todo"
-(deleteTodo)="deleteApiTodo(todo)"
-(finishTodo)="finishApiTodo(todo)"
-></app-todo-content>
+<div class="todo-content-container">
+    <app-todo-content
+    *ngFor="let todo of todos"
+    [color]="currentColor"
+    [todo]="todo"
+    (deleteTodo)="deleteApiTodo(todo)"
+    (finishTodo)="finishApiTodo(todo)"
+    ></app-todo-content>
+
+</div>
