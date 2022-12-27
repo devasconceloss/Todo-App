@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { Todo } from 'src/models/todo.model';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -10,14 +11,16 @@ import { Todo } from 'src/models/todo.model';
   styleUrls: ['./addtask.component.css']
 })
 export class AddtaskComponent implements OnInit {
-  public title: String = 'Todo App';
-  public todos: Todo[] = [];
-  public form: FormGroup;
-  public new_todo: Todo;
+  title: String = 'Todo App';
+  todos: Todo[] = [];
+  form: FormGroup;
+  new_todo: Todo;
+  faExclamation = faExclamationCircle;
+  
 
-  public id: number;
-  public title_todo: string;
-  public category: string;
+  id: number;
+  title_todo: string;
+  category: string;
   @Output() newTodo: EventEmitter<Todo> = new EventEmitter;
   color: string
 
@@ -48,7 +51,6 @@ export class AddtaskComponent implements OnInit {
     
     this.new_todo = new Todo(this.id, title_todo, category, done)
     this.id++
-
     this.newTodo.emit(this.new_todo)
   }
 
@@ -63,7 +65,7 @@ export class AddtaskComponent implements OnInit {
       case "Fun":
         return this.color = 'fun-color'
       
-      case "Other":
+      case "Personal":
         return this.color = 'other-color'
           
       default:
