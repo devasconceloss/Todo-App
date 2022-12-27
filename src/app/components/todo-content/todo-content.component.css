@@ -32,7 +32,8 @@
     height: 25.6px;
     border: none;
     appearance: none;
-    background-color: transparent;
+    background-color: #fff;
+
   }
   
   .todo-item input:focus {
