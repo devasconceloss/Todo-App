@@ -6,11 +6,11 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
-  selector: 'app-addtask',
-  templateUrl: './addtask.component.html',
-  styleUrls: ['./addtask.component.css']
+  selector: 'app-addtodo',
+  templateUrl: './addtodo.component.html',
+  styleUrls: ['./addtodo.component.css']
 })
-export class AddtaskComponent implements OnInit {
+export class AddtodoComponent implements OnInit {
   title: String = 'Todo App';
   todos: Todo[] = [];
   form: FormGroup;
