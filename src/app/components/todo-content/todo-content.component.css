@@ -10,10 +10,6 @@
 }
 
 
-.work-color {
-    background-color: black;
-}
-
 .todo-item {
     display: flex;
     align-items: center;
