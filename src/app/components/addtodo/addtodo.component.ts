@@ -22,7 +22,7 @@ export class AddtodoComponent implements OnInit {
   title_todo: string;
   category: string;
   @Output() newTodo: EventEmitter<Todo> = new EventEmitter;
-  color: string
+  @Output() class: EventEmitter<string> = new EventEmitter;
 
 
   constructor(private fb:FormBuilder, private apiService: ApiService) { 
@@ -54,22 +54,27 @@ export class AddtodoComponent implements OnInit {
     this.newTodo.emit(this.new_todo)
   }
 
-  filteringCategories(category: string): string {
+  filteringCategories(category: string) {
     switch(category) {
       case "Work":
-        return this.color = 'work-color'
+        this.class.emit('work-color');
+        break;
         
       case "Health":
-        return this.color = 'health-color'
+        this.class.emit('health-color');
+        break;
 
       case "Fun":
-        return this.color = 'fun-color'
+        this.class.emit('fun-color');
+        break;
       
       case "Personal":
-        return this.color = 'other-color'
+        this.class.emit('work-color');
+        break;
           
       default:
-        return 'default-color';
+        this.class.emit('default-color')
+        break
     }
   }
   
