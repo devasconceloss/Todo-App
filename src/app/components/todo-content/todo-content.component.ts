@@ -11,6 +11,7 @@ import { Todo } from 'src/models/todo.model';
 })
 export class TodoContentComponent implements OnInit {
   @Input() todo: Todo;
+  @Input() class: string;
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter
   @Output() finishTodo: EventEmitter<Todo> = new EventEmitter
   todos: Todo[] = [];
@@ -22,7 +23,7 @@ export class TodoContentComponent implements OnInit {
 
   ngOnInit() {
     
-  }
+    }
 
 
   deletingTodo(todo: Todo){
