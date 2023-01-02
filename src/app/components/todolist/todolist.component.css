@@ -1,8 +1,24 @@
-.todo-content-container {
+ .main-container {
     width: 330px;
     margin: 0 auto;
-    height: 500px;
-    overflow: scroll;
+    background-color: var(--color4);
+}
+
+.todo-content-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 430px;
+  overflow: scroll;
+}
+
+.todo-content-container {
+  overflow: scroll;
+
+}
+
+.main-container h3{
+  padding: .5rem 1rem;
+  font-weight: 600;
 }
 
 ::-webkit-scrollbar {
@@ -14,4 +30,18 @@
   background-color: #FF0000;
 }
 
-  
+.work-color {
+  background-color: black;
+}
+
+.fun-color {
+background-color: red;
+}
+
+.health-color {
+background-color: brown;
+}
+
+.personal-color {
+background-color: yellowgreen;
+}
