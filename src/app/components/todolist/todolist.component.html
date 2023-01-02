@@ -1,14 +1,18 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<app-addtask (newTodo)="addApiTodo($event)"></app-addtask>
-
-<div class="todo-content-container">
-    <app-todo-content
-    *ngFor="let todo of todos"
-    [color]="currentColor"
-    [todo]="todo"
-    (deleteTodo)="deleteApiTodo(todo)"
-    (finishTodo)="finishApiTodo(todo)"
-    ></app-todo-content>
+<app-addtodo (newTodo)="addApiTodo($event)" (class)="class=$event"></app-addtodo>
+<div class="main-container">
+    
+    <h3>Todos: {{arraySize}}</h3>
+    <div class="todo-content-container">
+        <app-todo-content
+        *ngFor="let todo of todos"
+        [todo]="todo"
+        [ngClass]="class"
+        (deleteTodo)="deleteApiTodo(todo)"
+        (finishTodo)="finishApiTodo(todo)"
+        ></app-todo-content>
+        
+    </div>
 
 </div>

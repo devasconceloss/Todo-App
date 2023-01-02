@@ -3,38 +3,35 @@ import { Todo } from 'src/models/todo.model';
 import { animate, trigger, style, transition } from '@angular/animations';
 import { ApiService } from '../../services/api.service';
 
-
 @Component({
   selector: 'app-todolist',
   templateUrl: './todolist.component.html',
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent implements OnInit {
-  public title: String = 'Todo List';
   todos: Todo[] = [];
-  doneTodos: Todo[] = [];
-  allTodos: Todo[] = [];
   todo: Todo;
-  @Input() color: string;
-  currentColor: string;
+  @Input() class: string;
   arraySize: number;
+
   constructor(private apiService: ApiService) { 
-
-
   }
 
 
   ngOnInit() {
     this.apiService
-      .getTodos()
-      .subscribe((todoData) => {
-        this.todos = this.todos.concat(todoData);
-        this.filterTodos()
-        this.arraySize = this.todos.length
-      })
+    .getTodos()
+    .subscribe((todoData) => {
+      this.todos = this.todos.concat(todoData);
+      this.setTodos(this.todos)
+      });
 
   }
   
+
+  setTodos(localtodos: Todo[]){
+    this.arraySize = localtodos.length
+  }
 
   deleteApiTodo(todo: Todo){
     this.apiService
@@ -42,12 +39,16 @@ export class TodolistComponent implements OnInit {
     .subscribe(
       () => (this.todos) = this.todos.filter((t) => t.id != todo.id))
     
+    this.arraySize -= 1
   }
 
   addApiTodo(new_todo: Todo){
     this.apiService
     .addTodo(new_todo)
     .subscribe(todo => this.todos.push(todo))
+
+    this.arraySize += 1
+    console.log(this.class)
   }
 
 
@@ -57,7 +58,4 @@ export class TodolistComponent implements OnInit {
     .subscribe((todo) => todo.done = true)
   }
 
-  filterTodos(){
-    this.doneTodos = this.todos.filter(todo => todo.done == true)
-  }
 }
