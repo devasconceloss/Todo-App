@@ -48,14 +48,26 @@ export class TodolistComponent implements OnInit {
     .subscribe(todo => this.todos.push(todo))
 
     this.arraySize += 1
-    console.log(this.class)
   }
 
+  finishApiTodo(todo: Todo) {
+    this.apiService.finishTodo(todo).subscribe(
+      (updatedTodo: Todo) => todo.done = updatedTodo.done)
+  }
+  
 
-  finishApiTodo(todo: Todo){
-    this.apiService
-    .finishTodo(todo)
-    .subscribe((todo) => todo.done = true)
+
+  showAllTodos(){
+    this.todos = [...this.todos]
+  }
+
+  showDoneTodos(){
+    this.todos = this.todos.filter((todo) => todo.done === true)
+  }
+
+  showUndoneTodos(){
+    this.todos = this.todos.filter((todo) => todo.done === false)
+
   }
 
 }
