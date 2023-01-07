@@ -34,6 +34,22 @@ export class TodoContentComponent implements OnInit {
   finishingTodo(todo: Todo){
     this.finishTodo.emit(todo)
   }
+
+
+  filteringCategories(category: String) {
+    switch(category) {
+      case "Work":
+        return 'brown'
+      case "Health":
+        return 'red'
+      case "Fun":
+        return 'blue'
+      case "Personal":
+        return 'grey'
+      default:
+        return {};
+    }
+  }
 }
     
 

@@ -1,6 +1,8 @@
-<div id="todolist-container" [ngClass]="class">
+<div #todolistContainer id="todolist-container" 
+[ngStyle]="{'background-color': filteringCategories(todo.category)}">
   <div style="list-style-type: none;" id="todolist">
-    <div class="todo-item">
+    <div class="todo-item"
+    [ngStyle]="{'background-color':todolistContainer.style.backgroundColor}">
       <input  type="text" value="{{todo.title}}" id="todo-text" readonly>
 
       <div id="action-buttons">
