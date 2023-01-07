@@ -47,37 +47,11 @@ export class AddtodoComponent implements OnInit {
     let category = this.form.controls['category'].value
     let done:boolean = false
 
-    this.filteringCategories(category)
     
     this.new_todo = new Todo(this.id, title_todo, category, done)
     this.id++
     this.newTodo.emit(this.new_todo)
   }
-
-  filteringCategories(category: string) {
-    switch(category) {
-      case "Work":
-        this.class.emit('work-color');
-        break;
-        
-      case "Health":
-        this.class.emit('health-color');
-        break;
-
-      case "Fun":
-        this.class.emit('fun-color');
-        break;
-      
-      case "Personal":
-        this.class.emit('work-color');
-        break;
-          
-      default:
-        this.class.emit('default-color')
-        break
-    }
-  }
-  
 
 
   async ngOnInit() {
