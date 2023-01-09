@@ -45,26 +45,3 @@
   color: red;
   cursor: pointer;
 }
-
-
-
-.fun-color {
-  background-color: red;
-  }
-  
-.health-color {
-  background-color: brown;
-  }
-  
-.personal-color {
-  background-color: black;
-  }
-  
-  .showingButtons {
-    display: flex;
-    align-items: flex-end;
-  }
-  
-  .showingButtons button {
-    padding: .2rem .5rem;
-  }
