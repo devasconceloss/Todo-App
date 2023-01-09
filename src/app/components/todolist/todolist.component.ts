@@ -11,7 +11,6 @@ import { ApiService } from '../../services/api.service';
 export class TodolistComponent implements OnInit {
   todos: Todo[] = [];
   todo: Todo;
-  @Input() class: string;
   arraySize: number;
 
   constructor(private apiService: ApiService) { 
