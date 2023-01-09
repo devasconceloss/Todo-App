@@ -17,7 +17,6 @@ export class TodoContentComponent implements OnInit {
   todos: Todo[] = [];
   faCheck = faCheck;
   faTimes = faTimes;
-  @Input() color: string;
 
   constructor() { }
 
@@ -39,13 +38,13 @@ export class TodoContentComponent implements OnInit {
   filteringCategories(category: String) {
     switch(category) {
       case "Work":
-        return 'brown'
+        return '#FFA500'
       case "Health":
-        return 'red'
+        return '#00FF00'
       case "Fun":
-        return 'blue'
+        return '#800080'
       case "Personal":
-        return 'grey'
+        return '#FF0000'
       default:
         return {};
     }
