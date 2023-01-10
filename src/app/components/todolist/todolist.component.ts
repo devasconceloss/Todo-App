@@ -61,20 +61,16 @@ export class TodolistComponent implements OnInit {
     )
     this.arraySize -= 1
   }
-  
-
-
-  showAllTodos(){
-    this.todos = [...this.todos]
-  }
 
   showDoneTodos(){
-    this.todos = this.todos.filter((todo) => todo.done === true)
+    this.apiService
+    .getTodos().pipe(
+      map(todos => todos.filter(todo => !todo.done))
+    )
+    .subscribe((todoData) => {
+      this.todos = this.todos.concat(todoData);
+      this.setTodos(this.todos)
+      });
+      
   }
-
-  showUndoneTodos(){
-    this.todos = this.todos.filter((todo) => todo.done === false)
-
-  }
-
 }
