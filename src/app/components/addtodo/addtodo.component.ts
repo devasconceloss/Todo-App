@@ -17,7 +17,7 @@ export class AddtodoComponent implements OnInit {
   new_todo: Todo;
   faExclamation = faExclamationCircle;
   
-
+  response: number = 0;
   id: number;
   title_todo: string;
   category: string;
@@ -55,9 +55,14 @@ export class AddtodoComponent implements OnInit {
 
 
   async ngOnInit() {
-    const response = await this.apiService.getHighestId();
-    this.id = response + 1;
+    try {
+      this.response = await this.apiService.getHighestId();
+      this.id = this.response + 1
+      
+    } catch (error) {
+      console.log(`Error getting the highest id on database: ${error}`)
+      this.id = 1
+    } 
   }
-  
   
 }
