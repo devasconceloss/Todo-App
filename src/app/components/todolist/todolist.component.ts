@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Todo } from 'src/models/todo.model';
 import { animate, trigger, style, transition } from '@angular/animations';
 import { ApiService } from '../../services/api.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-todolist',
@@ -19,7 +20,9 @@ export class TodolistComponent implements OnInit {
 
   ngOnInit() {
     this.apiService
-    .getTodos()
+    .getTodos().pipe(
+      map(todos => todos.filter(todo => !todo.done))
+    )
     .subscribe((todoData) => {
       this.todos = this.todos.concat(todoData);
       this.setTodos(this.todos)
@@ -51,7 +54,12 @@ export class TodolistComponent implements OnInit {
 
   finishApiTodo(todo: Todo) {
     this.apiService.finishTodo(todo).subscribe(
-      (updatedTodo: Todo) => todo.done = updatedTodo.done)
+      (updatedTodo: Todo) => {
+        todo.done = updatedTodo.done;
+        this.todos = this.todos.filter((t) => t.id !== todo.id)
+      }
+    )
+    this.arraySize -= 1
   }
   
 

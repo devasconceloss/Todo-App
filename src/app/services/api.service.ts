@@ -16,13 +16,15 @@ export class ApiService {
 
   }
 
-  public getTodos(): Observable<Todo>{
-     return this.http.get<Todo>(this.api_server_url)
-     .pipe(map(response => response['result']))
+  public getTodos(): Observable<Todo[]>{
+     return this.http.get<Todo[]>(this.api_server_url)
+     .pipe(
+      map(response => response['result'])
+      );
      
   }
 
-  public deleteTodo(todo:Todo): Observable<Todo>{
+  public deleteTodo(todo: Todo): Observable<Todo>{
     this.url_todo = `${this.api_server_url}todos/${todo.id}`
     return this.http.delete<Todo>(this.url_todo)
   }
