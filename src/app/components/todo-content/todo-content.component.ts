@@ -38,13 +38,13 @@ export class TodoContentComponent implements OnInit {
   filteringCategories(category: String) {
     switch(category) {
       case "Work":
-        return '#FFA500'
+        return '#011526'
       case "Health":
-        return '#00FF00'
+        return '#012E40'
       case "Fun":
-        return '#800080'
+        return '#025959'
       case "Personal":
-        return '#FF0000'
+        return '#02735E'
       default:
         return {};
     }

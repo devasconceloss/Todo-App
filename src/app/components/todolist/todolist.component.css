@@ -1,7 +1,7 @@
  .main-container {
     width: 330px;
     margin: 0 auto;
-    background-color: var(--color4);
+    background-color: var(--color3);
 }
 
 .todo-content-container {
