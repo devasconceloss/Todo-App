@@ -3,8 +3,13 @@
 <app-addtodo (newTodo)="addApiTodo($event)"></app-addtodo>
 <div class="main-container">
     
-    <h3>Todos: {{arraySize}}</h3>
-
+    <div class="view-actions">
+        <h3>Todos: {{arraySize}}</h3> 
+        <div class="view-buttons">
+            <button (click)="setView('undone')">Undone</button>
+            <button (click)="setView('done')">Done</button>
+        </div>
+    </div>
 
     <div class="todo-content-container">
         <app-todo-content

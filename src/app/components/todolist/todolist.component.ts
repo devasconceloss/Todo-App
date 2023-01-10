@@ -11,6 +11,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 })
 export class TodolistComponent implements OnInit {
   todos: Todo[] = [];
+  undoneTodos: Todo[] = [];
   doneTodos: Todo[] = [];
   todo: Todo;
   arraySize: number;
@@ -51,6 +52,7 @@ export class TodolistComponent implements OnInit {
       (updatedTodo: Todo) => {
         todo.done = updatedTodo.done;
         this.todos = this.todos.filter((t) => t.id !== todo.id)
+
       }
     )
     this.arraySize -= 1
@@ -67,7 +69,9 @@ export class TodolistComponent implements OnInit {
         map((todos) => todos.filter((todo) => !todo.done))
       )
       .subscribe((todoData) => {
-          this.todos = this.todos.concat(todoData);
+          this.undoneTodos = this.undoneTodos.concat(todoData);
+          this.setView('undone')
+
       });
 
   }
@@ -84,7 +88,17 @@ export class TodolistComponent implements OnInit {
       )
       .subscribe((todoData) => {
           this.doneTodos = this.doneTodos.concat(todoData);
-          console.log(this.doneTodos);
       });
   }  
+
+  setView(view: "done" | "undone" = "undone"){
+    if(view == 'done'){
+      this.todos = this.doneTodos.filter((todo) => todo.done)
+      this.setTodos(this.todos)
+    } else {
+      this.todos = this.undoneTodos.filter((todo) => !todo.done)
+      this.setTodos(this.todos)
+    }
+  }
+
 }
