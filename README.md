@@ -12,7 +12,7 @@ The first project version used localstorage to save the whole operation, but I c
 I didn't deploy the api yet and i'm not sure if i will do that, but if you want to take a look, here it's:
 [Todo-API](https://github.com/Thiagovasc/Todo-API)
 
-![](src/assets/images/03-01_screenshot.png)
+![](src/assets/images/screenshot2023-01-09.png)
 
 ## Project status:
 
