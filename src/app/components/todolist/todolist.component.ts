@@ -15,6 +15,7 @@ export class TodolistComponent implements OnInit {
   doneTodos: Todo[] = [];
   todo: Todo;
   arraySize: number;
+  currentView: "done" | "undone" = 'undone';
 
   constructor(private apiService: ApiService) { 
   }
@@ -23,17 +24,26 @@ export class TodolistComponent implements OnInit {
   ngOnInit() {  
       this.loadUndoneTodos()
       this.loadDoneTodos()
+      this.setView('undone')
   }
   
 
-  setTodos(localtodos: Todo[]){
+  catchArraySIze(localtodos: Todo[]){
     this.arraySize = localtodos.length
   }
   
   addApiTodo(new_todo: Todo){
     this.apiService
     .addTodo(new_todo)
-    .subscribe(todo => this.todos.push(todo))
+    .subscribe(
+      (todo) => {
+        this.todos = JSON.parse(localStorage.getItem('undone todos'))
+        this.todos.push(todo)
+        localStorage.setItem('undone todos', JSON.stringify(this.todos))
+
+      }
+    
+    )
 
     this.arraySize += 1
   }
@@ -42,21 +52,51 @@ export class TodolistComponent implements OnInit {
     this.apiService
     .deleteTodo(todo)
     .subscribe(
-      () => (this.todos) = this.todos.filter((t) => t.id != todo.id))
+      () => (this.todos) = this.todos.filter((t) => t.id != todo.id,
+      this.removeTodo(todo, this.currentView))
+      )
     
     this.arraySize -= 1
   }
 
   finishApiTodo(todo: Todo) {
+
     this.apiService.finishTodo(todo).subscribe(
       (updatedTodo: Todo) => {
         todo.done = updatedTodo.done;
-        this.todos = this.todos.filter((t) => t.id !== todo.id)
-
+        this.todos = this.todos.filter((t) => t.id !== todo.id);
+        this.removeTodo(todo, this.currentView)
       }
     )
+
     this.arraySize -= 1
   }
+
+  removeTodo(todo: Todo, view: "done" | "undone"): void {
+    const todoIndex = this.todos.indexOf(todo)
+
+    if(todoIndex != -1){
+
+    this.todos.splice(todoIndex, 1)
+    let localData = JSON.parse(localStorage.getItem(`${view} todos`))
+    localData.splice(todoIndex,1)
+
+    const attData = JSON.stringify(localData)
+    localStorage.setItem(`${view} todos`, attData)
+
+
+    } 
+
+  }
+
+  finishTodo(todo: Todo){
+    const todoIndex = this.todos.indexOf(todo);
+
+    if(todoIndex !== -1){
+      this.removeTodo(todo, this.currentView)
+    }
+  }
+
 
   loadUndoneTodos(){
     this.apiService
@@ -69,8 +109,7 @@ export class TodolistComponent implements OnInit {
         map((todos) => todos.filter((todo) => !todo.done))
       )
       .subscribe((todoData) => {
-          this.undoneTodos = this.undoneTodos.concat(todoData);
-          this.setView('undone')
+        localStorage.setItem('undone todos', JSON.stringify(todoData))
 
       });
 
@@ -87,17 +126,21 @@ export class TodolistComponent implements OnInit {
         map((todos) => todos.filter((todo) => todo.done))
       )
       .subscribe((todoData) => {
-          this.doneTodos = this.doneTodos.concat(todoData);
+          localStorage.setItem('done todos', JSON.stringify(todoData))
       });
   }  
 
   setView(view: "done" | "undone" = "undone"){
+    this.currentView = view
     if(view == 'done'){
-      this.todos = this.doneTodos.filter((todo) => todo.done)
-      this.setTodos(this.todos)
-    } else {
-      this.todos = this.undoneTodos.filter((todo) => !todo.done)
-      this.setTodos(this.todos)
+      this.doneTodos = JSON.parse(localStorage.getItem('done todos'))
+      this.todos = this.doneTodos
+      this.catchArraySIze(this.todos)
+    }
+    if(view == 'undone') {
+      this.undoneTodos = JSON.parse(localStorage.getItem('undone todos'))
+      this.todos = this.undoneTodos
+      this.catchArraySIze(this.todos)
     }
   }
 
