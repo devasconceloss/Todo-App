@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import { Todo } from 'src/models/todo.model';
 
 
@@ -15,8 +16,10 @@ export class TodoContentComponent implements OnInit {
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter
   @Output() finishTodo: EventEmitter<Todo> = new EventEmitter
   todos: Todo[] = [];
+
   faCheck = faCheck;
   faTimes = faTimes;
+  faArrow = faArrowAltCircleLeft
 
   constructor() { }
 

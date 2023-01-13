@@ -39,7 +39,7 @@
   outline: none;
 }
 
-.todo-item .fa-check {
+.todo-item .fa-check, .fa-return {
   color: blue;
   cursor: pointer;
 }
