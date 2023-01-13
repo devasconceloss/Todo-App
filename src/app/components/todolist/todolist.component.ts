@@ -3,6 +3,7 @@ import { Todo } from 'src/models/todo.model';
 import { animate, trigger, style, transition } from '@angular/animations';
 import { ApiService } from '../../services/api.service';
 import { catchError, map, Observable, of } from 'rxjs';
+import { faLess } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-todolist',
@@ -75,11 +76,12 @@ export class TodolistComponent implements OnInit {
     .finishTodo(updatedTodo).pipe(
       catchError((err) => {
         console.log(`API error ${err}`)
-        return of(updatedTodo)
+        return of(todo)
       })
     )
     .subscribe(
       () => {
+        todo.done = updatedTodo.done
         this.todos = this.todos.filter((t) => t.id !== todo.id,
         this.removeTodo(todo, this.currentView, "finish"))
 
@@ -88,8 +90,27 @@ export class TodolistComponent implements OnInit {
     this.arraySize -= 1;
   }
   
+  reopenApiTodo(todo: Todo){
+    const updatedTodo = {...todo, done: false}
+    this.apiService
+    .finishTodo(updatedTodo).pipe(
+      catchError((err) => {
+        console.log(`API error ${err}`)
+        return of(todo)
+      })
+    )
+    .subscribe(
+      () => {
+        todo.done = updatedTodo.done
+        this.todos = this.todos.filter((t) => t.id !== todo.id,
+        this.removeTodo(todo, this.currentView, "open"))
 
-  removeTodo(todo: Todo, view: "done" | "undone", flag: "delete" | "finish"): void {
+      }
+    );
+    this.arraySize -= 1;
+  }
+
+  removeTodo(todo: Todo, view: "done" | "undone", flag: "delete" | "finish" | "open"): void {
     const todoIndex = this.todos.indexOf(todo)
 
     if(todoIndex != -1){
@@ -104,7 +125,11 @@ export class TodolistComponent implements OnInit {
         doneTodos.push(todo)
         localStorage.setItem('done todos', JSON.stringify(doneTodos))
 
-      } 
+      } if(flag == "open"){
+          let undoneTodos = JSON.parse(localStorage.getItem('undone todos'))
+          undoneTodos.push(todo)
+          localStorage.setItem('undone todos', JSON.stringify(undoneTodos))
+      }
     } 
 
   }

@@ -35,8 +35,13 @@ export class ApiService {
     .pipe(map(response => response['result']))
   }
 
-  public  finishTodo(todo: Todo): Observable<Todo>{
+  public finishTodo(todo: Todo): Observable<Todo>{
     this.url_todo = `${this.api_server_url}todos/finish/${todo.id}`
+    return this.http.patch<Todo>(this.url_todo, todo)
+  }
+
+  public reopenTodo(todo: Todo): Observable<Todo>{
+    this.url_todo = `${this.api_server_url}todos/reopen/${todo.id}`
     return this.http.patch<Todo>(this.url_todo, todo)
   }
 
