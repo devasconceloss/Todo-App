@@ -51,6 +51,7 @@ export class AddtodoComponent implements OnInit {
     this.new_todo = new Todo(this.id, title_todo, category, done)
     this.id++
     this.newTodo.emit(this.new_todo)
+    this.form.reset()
   }
 
 
