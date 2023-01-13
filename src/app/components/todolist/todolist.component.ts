@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Todo } from 'src/models/todo.model';
-import { animate, trigger, style, transition } from '@angular/animations';
 import { ApiService } from '../../services/api.service';
-import { catchError, map, Observable, of } from 'rxjs';
-import { faLess } from '@fortawesome/free-brands-svg-icons';
+import { catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-todolist',
