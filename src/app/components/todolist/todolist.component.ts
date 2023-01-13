@@ -34,7 +34,12 @@ export class TodolistComponent implements OnInit {
   
   addApiTodo(new_todo: Todo){
     this.apiService
-    .addTodo(new_todo)
+    .addTodo(new_todo).pipe(
+      catchError((err) => {
+        console.log(err)
+        return of(new_todo)
+      })
+    )
     .subscribe(
       (todo) => {
         this.todos = JSON.parse(localStorage.getItem('undone todos'))
@@ -50,51 +55,58 @@ export class TodolistComponent implements OnInit {
 
   deleteApiTodo(todo: Todo){
     this.apiService
-    .deleteTodo(todo)
+    .deleteTodo(todo).pipe(
+      catchError((err) => {
+        console.log(`API error ${err}`)
+        return of(todo)
+      })
+    )
     .subscribe(
       () => (this.todos) = this.todos.filter((t) => t.id != todo.id,
-      this.removeTodo(todo, this.currentView))
+      this.removeTodo(todo, this.currentView, "delete"))
       )
     
     this.arraySize -= 1
   }
 
   finishApiTodo(todo: Todo) {
-
-    this.apiService.finishTodo(todo).subscribe(
-      (updatedTodo: Todo) => {
-        todo.done = updatedTodo.done;
-        this.todos = this.todos.filter((t) => t.id !== todo.id);
-        this.removeTodo(todo, this.currentView)
-      }
+    const updatedTodo = {...todo, done: true}
+    this.apiService
+    .finishTodo(updatedTodo).pipe(
+      catchError((err) => {
+        console.log(`API error ${err}`)
+        return of(updatedTodo)
+      })
     )
+    .subscribe(
+      () => {
+        this.todos = this.todos.filter((t) => t.id !== todo.id,
+        this.removeTodo(todo, this.currentView, "finish"))
 
-    this.arraySize -= 1
+      }
+    );
+    this.arraySize -= 1;
   }
+  
 
-  removeTodo(todo: Todo, view: "done" | "undone"): void {
+  removeTodo(todo: Todo, view: "done" | "undone", flag: "delete" | "finish"): void {
     const todoIndex = this.todos.indexOf(todo)
 
     if(todoIndex != -1){
 
-    this.todos.splice(todoIndex, 1)
-    let localData = JSON.parse(localStorage.getItem(`${view} todos`))
-    localData.splice(todoIndex,1)
+      let localData = JSON.parse(localStorage.getItem(`${view} todos`))
+      localData.splice(todoIndex,1)
+      const attData = JSON.stringify(localData)
+      localStorage.setItem(`${view} todos`, attData)
+      
+      if(flag == "finish"){
+        let doneTodos = JSON.parse(localStorage.getItem('done todos'))
+        doneTodos.push(todo)
+        localStorage.setItem('done todos', JSON.stringify(doneTodos))
 
-    const attData = JSON.stringify(localData)
-    localStorage.setItem(`${view} todos`, attData)
-
-
+      } 
     } 
 
-  }
-
-  finishTodo(todo: Todo){
-    const todoIndex = this.todos.indexOf(todo);
-
-    if(todoIndex !== -1){
-      this.removeTodo(todo, this.currentView)
-    }
   }
 
 
@@ -104,7 +116,8 @@ export class TodolistComponent implements OnInit {
       .pipe(
         catchError((err) => {
           console.log(`API error: ${err}`);
-          return of([] as Todo[]);
+          localStorage.setItem('undone todos', JSON.stringify([]))
+          return of([] as Todo[])
         }),
         map((todos) => todos.filter((todo) => !todo.done))
       )
@@ -121,7 +134,8 @@ export class TodolistComponent implements OnInit {
       .pipe(
         catchError((err) => {
           console.log(`API error: ${err}`);
-          return of([] as Todo[]);
+          localStorage.setItem('done todos', JSON.stringify([]))
+          return of([] as Todo[])
         }),
         map((todos) => todos.filter((todo) => todo.done))
       )
