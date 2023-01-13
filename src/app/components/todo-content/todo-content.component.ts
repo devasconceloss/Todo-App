@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +16,7 @@ export class TodoContentComponent implements OnInit {
   @Input() class: string;
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter
   @Output() finishTodo: EventEmitter<Todo> = new EventEmitter
+  @Output() reopenTodo: EventEmitter<Todo> = new EventEmitter
   todos: Todo[] = [];
 
   faCheck = faCheck;
@@ -37,6 +39,9 @@ export class TodoContentComponent implements OnInit {
     this.finishTodo.emit(todo)
   }
 
+  reopeningTodo(todo: Todo){
+    this.reopenTodo.emit(todo)
+  }
 
   filteringCategories(category: String) {
     switch(category) {
