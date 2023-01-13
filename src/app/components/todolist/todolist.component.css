@@ -53,4 +53,10 @@
   cursor: pointer;
 }
 
+.view-buttons button:active,
+.view-buttons button:focus {
+    text-decoration: underline;
+}
+
+
 
