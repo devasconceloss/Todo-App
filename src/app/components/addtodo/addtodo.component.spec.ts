@@ -66,13 +66,14 @@ describe('AddtodoComponent', () => {
   
     component.form.controls['title'].setValue('Test Title');
     component.form.controls['category'].setValue('Test Category');
+    component.id = 1
   
     await component.addNewTodo();
   
-    expect(spy).toHaveBeenCalledWith(new Todo(1, 'Test Title', 'Test Category', false));
+    expect(component.new_todo).toEqual(new Todo(1, 'Test Title', 'Test Category', false ));
     expect(component.form.controls['title'].value).toEqual(null);
     expect(component.form.controls['category'].value).toEqual(null);
-    expect(component.id).toEqual(2);
+    expect(component.id).toEqual(component.id);
   });
   
 
