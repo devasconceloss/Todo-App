@@ -27,7 +27,7 @@ export class TodolistComponent implements OnInit {
   }
   
 
-  catchArraySIze(localtodos: Todo[]){
+  catchArraySize(localtodos: Todo[]){
     this.arraySize = localtodos.length
   }
   
@@ -41,16 +41,22 @@ export class TodolistComponent implements OnInit {
     )
     .subscribe(
       (todo) => {
-        this.todos = JSON.parse(localStorage.getItem('undone todos'))
-        this.todos.push(todo)
-        localStorage.setItem('undone todos', JSON.stringify(this.todos))
-
+        if (this.currentView === 'done') {
+          this.undoneTodos = JSON.parse(localStorage.getItem('undone todos'))
+          this.undoneTodos.push(todo)
+          localStorage.setItem('undone todos', JSON.stringify(this.undoneTodos))
+          this.catchArraySize(this.doneTodos)
+        } else {
+          this.todos = JSON.parse(localStorage.getItem('undone todos'))
+          this.todos.push(todo)
+          localStorage.setItem('undone todos', JSON.stringify(this.todos))
+          this.catchArraySize(this.todos)
+        }
       }
     
     )
-
-    this.arraySize += 1
   }
+  
 
   deleteApiTodo(todo: Todo){
     this.apiService
@@ -172,12 +178,12 @@ export class TodolistComponent implements OnInit {
     if(view == 'done'){
       this.doneTodos = JSON.parse(localStorage.getItem('done todos'))
       this.todos = this.doneTodos
-      this.catchArraySIze(this.todos)
+      this.catchArraySize(this.todos)
     }
     if(view == 'undone') {
       this.undoneTodos = JSON.parse(localStorage.getItem('undone todos'))
       this.todos = this.undoneTodos
-      this.catchArraySIze(this.todos)
+      this.catchArraySize(this.todos)
     }
   }
 
