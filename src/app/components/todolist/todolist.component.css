@@ -16,23 +16,31 @@
 
 }
 
-.main-container h3{
-  padding: .5rem 1rem;
+.main-container h3 {
+  padding: 10px;
   font-weight: 600;
+  color: var(--color1);
 }
+
 
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: #F5F5F5;
+  background-color: var(--color3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #FF0000;
+  background-color: var(--color1);
 }
+
 
 .view-actions {
   display: flex;
+  background-color: var(--color2);
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
+
 
 .view-buttons {
   display: flex;
@@ -53,10 +61,13 @@
   cursor: pointer;
 }
 
-.view-buttons button:active,
-.view-buttons button:focus {
-    text-decoration: underline;
+.view-buttons button.active {
+  color: white;
+  background-color: var(--color1);
+  border-radius: 5px;
+  padding: 5px 10px;
 }
+
 
 
 
