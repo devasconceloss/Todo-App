@@ -24,4 +24,16 @@ Start the development server:
 
 Navigate to http://localhost:4200/ in your browser to access the application.
 
-![](/src/assets/images/current-screenshot13-01-23.png) 
+![](/src/assets/images/todo-app.gif) 
+
+
+## Testing 
+
+Components:
+- [x] addtodo component;
+- [ ] todocontent;
+- [ ] todolist;
+- [ ] app component.
+
+Services:
+- [ ] api service.
